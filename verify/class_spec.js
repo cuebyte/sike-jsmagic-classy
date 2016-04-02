@@ -61,5 +61,11 @@ describe("Implement Instance Methods", function() {
   it("should not define `initialize` as a method", function() {
     expect(foo.initialize).to.be.undefined;
   });
-});
 
+  it("should found methods in prototype", function() {
+    expect(Foo.prototype.getA).to.be.a("function");
+    expect(Foo.prototype.getB).to.be.a("function");
+    expect(Foo.prototype.getA.call(foo)).to.eq(1);
+    expect(Foo.prototype.getB.call(foo)).to.eq(2);
+  })
+});
