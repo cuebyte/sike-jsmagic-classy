@@ -22,9 +22,12 @@ function Class(child, parent) {
     child.__super__ = Object
   }
   child.prototype.__stack = child
+  child.prototype.__stack = child
   child.prototype.super = function(methodName) {
     this.__stack = this.__stack.__super__
-    return this.__stack.prototype[methodName].apply(this, [].slice.call(arguments, 1))
+    var result = this.__stack.prototype[methodName].apply(this, [].slice.call(arguments, 1))
+    this.__stack = this.__proto__.constructor
+    return result
   }
   return child;
 }
